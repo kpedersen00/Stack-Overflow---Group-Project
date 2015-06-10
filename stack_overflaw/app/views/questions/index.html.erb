@@ -1,3 +1,6 @@
+
+<%= @quote %>
+
 <% @questions.each do |question| %>
 <h2><%= link_to "#{question.title}", question_path(question) %></h2>
 <p><%= question.content %></p>
