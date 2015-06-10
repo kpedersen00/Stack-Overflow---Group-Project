@@ -47,3 +47,5 @@ gem 'shoulda-matchers'
 gem 'factory_girl'
 
 gem 'httparty'
+
+gem 'dotenv-rails', :groups => [:development, :test]
