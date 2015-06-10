@@ -1,6 +1,10 @@
 class QuestionsController < ApplicationController
+
+  include QuoteGetter
+
   def index
-    @questions = Question.all
+    @questions = Question.all.order(:created_at)
+    @quote = quote
     new
   end
 
