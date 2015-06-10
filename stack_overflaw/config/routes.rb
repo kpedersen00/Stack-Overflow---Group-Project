@@ -3,10 +3,17 @@ Rails.application.routes.draw do
   # get 'questions/:id', to 'questions#show'
   # get 'questions/index'
   # resources :questions, only: [:show, :index, :new]
+  match '/questions/:question_id/votes', to: 'votes#downvote',  via: :delete
+
+  match '/answers/:answer_id/votes', to: 'votes#downvote',  via: :delete
+
   resources :questions do
-    resources :answers
+    resources :answers, :votes
   end
 
+ resources :answers do
+    resources :votes
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

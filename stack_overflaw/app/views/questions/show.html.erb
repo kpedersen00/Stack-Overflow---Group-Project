@@ -8,7 +8,6 @@
 <h2>Answers</h2>
 <%= render @question.answers %>
 
-
 <%= form_for([@question, @question.answers.build]) do |f| %>
   <%= f.label :title %>:
   <%= f.text_field :title %><br />
