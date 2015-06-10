@@ -1,4 +1,23 @@
 <% @questions.each do |question| %>
 <h2><%= link_to "#{question.title}", question_path(question) %></h2>
 <p><%= question.content %></p>
+<%= form_for([question, question.votes.build]) do |f| %>
+<%= f.submit %>
+<% end %>
+<%= link_to 'Downvote', url_for(controller: :votes, question_id: question.id), method: :delete, data: { question_id: question.id} %>
+
+
+
+<%= question.votes.count %>
+<% end %>
+
+
+<%= form_for @question do |f| %>
+  <%= f.label :title %>:
+  <%= f.text_field :title %><br />
+
+  <%= f.label :content %>:
+  <%= f.text_field :content %><br />
+
+  <%= f.submit %>
 <% end %>

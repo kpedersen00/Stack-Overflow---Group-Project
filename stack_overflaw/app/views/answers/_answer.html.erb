@@ -1,2 +1,7 @@
 <h2><%= answer.title %></h2>
 <p><%= answer.content %></p>
+<%= answer.votes.count %>
+<%= form_for([answer, answer.votes.build]) do |f| %>
+<%= f.submit %>
+<% end %>
+<%= link_to 'Downvote', url_for(controller: :votes, answer_id: answer.id), method: :delete %>
