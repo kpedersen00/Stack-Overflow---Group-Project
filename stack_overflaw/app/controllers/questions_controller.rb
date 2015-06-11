@@ -14,12 +14,35 @@ class QuestionsController < ApplicationController
 
   def create
     @question = Question.new(question_params)
-    if @question.save
-      redirect_to question_path(@question)
-    else
-      render 'new'
+    respond_to do |format|
+      if @question.save
+        format.html {redirect_to @question, notice: 'Question successfully created.'}
+        format.json {render json: @question, status: :created}
+      else
+        format.html { render action: 'new'}
+        format.json {render json: @question.errors.full_messages, status: :unprocessable_entity}
+      end
     end
   end
+
+ # def create
+ #  @question = Question.new(question_params)
+# respond_to do |format|
+#     if @todo.save
+#       format.html { redirect_to @todo, notice: 'Todo successfully created.'}
+#       format.json { render json: @todo, status: :created }
+#     else
+#       format.html { render action: 'index' }
+#       format.json { render json: @todo.errors.full_messages, status: :unprocessable_entity }
+#     end
+#   end
+
+
+
+
+
+
+
 
   def edit
     @question = Question.find(params[:id])

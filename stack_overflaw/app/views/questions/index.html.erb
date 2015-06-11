@@ -1,26 +1,44 @@
+<div id='question_index'>
 
-<%= @quote %>
+  <div id="quote">
+    <%= @quote %>
+  </div>
 
-<% @questions.each do |question| %>
-<h2><%= link_to "#{question.title}", question_path(question) %></h2>
-<p><%= question.content %></p>
-<%= form_for([question, question.votes.build]) do |f| %>
-<%= f.submit %>
-<% end %>
-<%= link_to 'Downvote', url_for(controller: :votes, question_id: question.id), method: :delete, data: { question_id: question.id} %>
+  <div id='all_questions'>
+    <% @questions.each do |question| %>
+    <div class="question">
 
+      <h2><%= link_to "#{question.title}", question_path(question) %></h2>
 
+      <p><%= question.content %></p>
 
-<%= question.votes.count %>
-<% end %>
+      <div class="upvote">
+        <%= form_for([question, question.votes.build]) do |f| %>
+        <%= f.submit %>
+        <% end %>
+      </div>
 
+      <div class="downvote">
+        <%= link_to 'Downvote', url_for(controller: :votes, question_id: question.id), method: :delete, data: { question_id: question.id} %>
+      </div>
 
-<%= form_for @question do |f| %>
-  <%= f.label :title %>:
-  <%= f.text_field :title %><br />
+      <div class="question_votes">
+        <%= question.votes.count %>
+      </div>
 
-  <%= f.label :content %>:
-  <%= f.text_field :content %><br />
+    </div>
+    <% end %>
+  </div>
 
-  <%= f.submit %>
-<% end %>
+  <div id='new_questions'>
+    <%= form_for @question do |f| %>
+      <%= f.label :title %>:
+      <%= f.text_field :title %><br />
+
+      <%= f.label :content %>:
+      <%= f.text_field :content %><br />
+
+      <%= f.submit %>
+    <% end %>
+  </div>
+</div>
